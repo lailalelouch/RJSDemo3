@@ -4,6 +4,8 @@ import "font-awesome/css/font-awesome.min.css";
 
 import "./App.css";
 
+import Table from "./Table";
+
 function App() {
   const statusIcon = done => {
     if (done) {

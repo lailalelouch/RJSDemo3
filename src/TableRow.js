@@ -5,7 +5,6 @@ import "./App.css";
 class TableRow extends Component {
   render() {
     let statIcon = () => {
-      console.log(this.props.task.status);
       return this.props.task.status
         ? "fa fa-check-circle"
         : "fa fa-times-circle";
@@ -27,7 +26,7 @@ class TableRow extends Component {
         <td>
           <i className={statIcon()} style={iconColor()} />
         </td>
-        <td>{this.props.task.task}</td>
+        <td>{this.props.task.taskName}</td>
         <td style={taskPriority()}>{this.props.task.priority.toUpperCase()}</td>
       </tr>
     );

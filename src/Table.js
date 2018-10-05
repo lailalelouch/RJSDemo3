@@ -1,14 +1,13 @@
 import React, { Component } from "react";
 
 import "./App.css";
-import tasks from "./data";
 
 import TableRow from "./TableRow";
 
 class Table extends Component {
   render() {
-    let taskRow = tasks.map(task => {
-      return <TableRow task={task} />;
+    let taskRow = this.props.tasks.map(task => {
+      return <TableRow task={task} key={task.taskName} />;
     });
 
     return (

@@ -5,7 +5,7 @@ import "font-awesome/css/font-awesome.min.css";
 import "./App.css";
 import tasks from "./data";
 
-import Table from "./Table";
+import TodoList from "./TodoList";
 
 function App() {
   const statusIcon = done => {

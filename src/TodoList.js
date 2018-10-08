@@ -2,26 +2,26 @@ import React, { Component } from "react";
 
 import "./App.css";
 
-import TableRow from "./TableRow";
+import TodoItem from "./TodoItem";
 
-class Table extends Component {
+class TodoList extends Component {
   render() {
-    let taskRow = this.props.tasks.map(task => {
-      return <TableRow task={task} key={task.taskName} />;
-    });
+    let taskRows = this.props.tasks.map(task => (
+      <TodoItem task={task} key={task.taskName} />
+    ));
 
     return (
       <table className="table">
         <tbody>
           <tr className="headerRow">
-            <th>STAT</th>
+            <th>STATUS</th>
             <th>TASK</th>
             <th>PRIORITY</th>
           </tr>
-          {taskRow}
+          {taskRows}
         </tbody>
       </table>
     );
   }
 }
-export default Table;
+export default TodoList;

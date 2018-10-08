@@ -1,17 +1,17 @@
 let tasks = [
   {
     task: "Go to the supermarket",
-    status: true,
+    done: true,
     priority: "MIDDLE"
   },
   {
     task: "Cook dinner",
-    status: false,
+    done: false,
     priority: "HIGH"
   },
   {
     task: "Call Mom",
-    status: false,
+    done: false,
     priority: "LOW"
   }
 ];

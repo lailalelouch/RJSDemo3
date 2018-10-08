@@ -7,19 +7,19 @@ import TodoItem from "./TodoItem";
 class TodoList extends Component {
   render() {
     let taskRows = this.props.tasks.map(task => (
-      <TodoItem task={task} key={task.taskName} />
+      <TodoItem task={task} key={task.task} />
     ));
 
     return (
       <table className="table">
-        <tbody>
+        <thead>
           <tr className="headerRow">
             <th>STATUS</th>
             <th>TASK</th>
             <th>PRIORITY</th>
           </tr>
-          {taskRows}
-        </tbody>
+        </thead>
+        <tbody>{taskRows}</tbody>
       </table>
     );
   }

@@ -12,7 +12,7 @@ class App extends Component {
         <p class="title">TO DO LIST</p>
         <table class="table">
           <tr class="headerRow">
-            <th>STAT</th>
+            <th>STATUS</th>
             <th>TASK</th>
             <th>PRIORITY</th>
           </tr>

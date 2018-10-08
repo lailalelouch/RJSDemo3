@@ -1,11 +1,3 @@
-1- Start by creating a component for the table's row
-2- Remove the rows and call the component a couple of times with the same information
-3- Send the task through props
-4- Give every component a different task
-5- Send the priority and status through props
-6- Import tasks from tasks
-7- Send through props the imported data instead of static data
-8- Iterate through the array using .map
 
 ---
 

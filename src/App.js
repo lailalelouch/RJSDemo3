@@ -18,20 +18,20 @@ class App extends Component {
           </tr>
           <tr class="row">
             <td>
-              <i className="fa fa-check-circle" style={{ color: "green" }} />
+              <i className="fa fa-check-circle" />
             </td>
             <td>Go to the supermarket</td>
-            <td style={{ color: "orange" }}>MIDDLE</td>
+            <td className="middle">MIDDLE</td>
           </tr>
           <tr class="row">
-            <i className="fa fa-times-circle" style={{ color: "red" }} />
+            <i className="fa fa-times-circle" />
             <td>Cook dinner</td>
-            <td style={{ color: "red" }}>HIGH</td>
+            <td className="high">HIGH</td>
           </tr>
           <tr class="row">
-            <i className="fa fa-times-circle" style={{ color: "red" }} />
+            <i className="fa fa-times-circle" />
             <td>Call Mom</td>
-            <td style={{ color: "green" }}>LOW</td>
+            <td className="low">LOW</td>
           </tr>
         </table>
       </div>

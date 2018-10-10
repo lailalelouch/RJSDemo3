@@ -1,11 +1,198 @@
-1- Start by creating a component for the table's row
-2- Remove the rows and call the component a couple of times with the same information
-3- Send the task through props
-4- Give every component a different task
-5- Send the priority and status through props
-6- Import tasks from tasks
-7- Send through props the imported data instead of static data
-8- Iterate through the array using .map
+1- Create a component: ToDoList
+
+    import React, { Component } from "react";
+
+    import "./App.css";
+
+    class TodoList extends Component {
+      render() {
+
+        return (
+          <table className="table">
+            <thead>
+              <tr className="headerRow">
+                <th>STATUS</th>
+                <th>TASK</th>
+                <th>PRIORITY</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <i className={statusIcon(tasks[0].done)} />
+                </td>
+                <td>{tasks[0].task}</td>
+                <td className={tasks[0].priority}>
+                  {tasks[0].priority.toUpperCase()}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        );
+      }
+    }
+    export default TodoList;
+
+
+    import ToDoList from "./ToDoList";
+
+    class App extends Component {
+      render() {
+        return (
+          <div className="rectangle">
+            <p className="title">TO DO LIST</p>
+            <ToDoList />
+          </div>
+        );
+      }
+    }
+
+    export default App;
+
+2- Send tasks through props
+
+    class App extends Component {
+      render() {
+        return (
+          <div className="rectangle">
+            <p className="title">TO DO LIST</p>
+            <ToDoList tasks={tasks} />
+          </div>
+        );
+      }
+    }
+
+    class TodoList extends Component {
+      render() {
+        const statusIcon = done => {
+          if (done) {
+            return "fa fa-check-circle";
+          } else {
+            return "fa fa-times-circle";
+          }
+        };
+
+        return (
+          <table className="table">
+            <thead>
+              ...
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <i className={statusIcon(this.props.tasks[0].done)} />
+                </td>
+                <td>{this.props.tasks[0].task}</td>
+                <td className={this.props.tasks[0].priority}>
+                  {this.props.tasks[0].priority.toUpperCase()}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        );
+      }
+    }
+
+3- Call component a couple of times
+
+    class App extends Component {
+      render() {
+        return (
+          <div className="rectangle">
+            <p className="title">TO DO LIST</p>
+              <ToDoList tasks={tasks} />
+              <ToDoList tasks={tasks} />
+              <ToDoList tasks={tasks} />
+          </div>
+        );
+      }
+    }
+
+4- Create a component: ToDoItem
+
+    import React, { Component } from "react";
+
+    import "./App.css";
+
+    class TableRow extends Component {
+      render() {
+        const statusIcon = done => {
+          if (done) {
+            return "fa fa-check-circle";
+          } else {
+            return "fa fa-times-circle";
+          }
+        };
+        return (
+          <tr>
+            <td>
+              <i className={statusIcon(task.done)} />
+            </td>
+            <td>{task.task}</td>
+            <td className={task.priority}>
+              {task.priority.toUpperCase()}
+            </td>
+          </tr>
+        );
+      }
+    }
+    export default TableRow;
+
+5- Call Component ToDoItem a few times
+
+    import TodoItem from "./TodoItem";
+
+    class TodoList extends Component {
+      render() {
+
+        return (
+          <table className="table">
+            <thead>
+              <tr className="headerRow">
+                <th>STATUS</th>
+                <th>TASK</th>
+                <th>PRIORITY</th>
+              </tr>
+            </thead>
+            <tbody>
+              <TodoItem task={this.props.tasks[0]}/>
+              <TodoItem task={this.props.tasks[1]}/>
+              <TodoItem task={this.props.tasks[2]}/>
+            </tbody>
+          </table>
+        );
+      }
+    }
+    export default TodoList;
+
+5- Iterate through the array using .map
+
+    let taskRows = this.props.tasks.map(task => (
+      <TodoItem task={task} key={task.task} />
+    ));
+
+    import TodoItem from "./TodoItem";
+
+    class TodoList extends Component {
+      render() {
+
+        return (
+          <table className="table">
+            <thead>
+              <tr className="headerRow">
+                <th>STATUS</th>
+                <th>TASK</th>
+                <th>PRIORITY</th>
+              </tr>
+            </thead>
+            <tbody>
+              {taskRows}
+            </tbody>
+          </table>
+        );
+      }
+    }
+    export default TodoList;
 
 ---
 

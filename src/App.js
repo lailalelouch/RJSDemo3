@@ -7,32 +7,34 @@ import tasks from "./data";
 
 class App extends Component {
   render() {
+    const statusIcon = done => {
+      if (done) {
+        return "fa fa-check-circle";
+      } else {
+        return "fa fa-times-circle";
+      }
+    };
+
     return (
-      <div class="rectangle">
-        <p class="title">TO DO LIST</p>
-        <table class="table">
-          <tr class="headerRow">
-            <th>STAT</th>
+      <div className="rectangle">
+        <p className="title">TO DO LIST</p>
+        <table>
+          <thead class="headerRow">
+            <th>STATUS</th>
             <th>TASK</th>
             <th>PRIORITY</th>
-          </tr>
-          <tr class="row">
-            <td>
-              <i className="fa fa-check-circle" style={{ color: "green" }} />
-            </td>
-            <td>Go to the supermarket</td>
-            <td style={{ color: "orange" }}>MIDDLE</td>
-          </tr>
-          <tr class="row">
-            <i className="fa fa-times-circle" style={{ color: "red" }} />
-            <td>Cook dinner</td>
-            <td style={{ color: "red" }}>HIGH</td>
-          </tr>
-          <tr class="row">
-            <i className="fa fa-times-circle" style={{ color: "red" }} />
-            <td>Call Mom</td>
-            <td style={{ color: "green" }}>LOW</td>
-          </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <i className={statusIcon(tasks[0].done)} />
+              </td>
+              <td>{tasks[0].task}</td>
+              <td className={tasks[0].priority}>
+                {tasks[0].priority.toUpperCase()}
+              </td>
+            </tr>
+          </tbody>
         </table>
       </div>
     );

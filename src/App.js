@@ -19,20 +19,20 @@ class App extends Component {
       <div className="rectangle">
         <p className="title">TO DO LIST</p>
         <table>
-          <thead class="headerRow">
-            <th>STATUS</th>
-            <th>TASK</th>
-            <th>PRIORITY</th>
+          <thead>
+            <tr>
+              <th>STATUS</th>
+              <th>TASK</th>
+              <th>PRIORITY</th>
+            </tr>
           </thead>
           <tbody>
             <tr>
               <td>
-                <i className={statusIcon(tasks[0].done)} />
+                <i className={statusIcon(true)} />
               </td>
-              <td>{tasks[0].task}</td>
-              <td className={tasks[0].priority}>
-                {tasks[0].priority.toUpperCase()}
-              </td>
+              <td>Go to the supermarket</td>
+              <td className="middle">MIDDLE</td>
             </tr>
           </tbody>
         </table>

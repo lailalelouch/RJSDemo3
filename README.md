@@ -1,66 +1,115 @@
-1- In TableRow.js, add an onClick event for the status <td> with an alert like this to show them what will happen
+## Toggle Status
 
-  <td onClick={alert('button clicked')}>
-    <i className={statIcon()} style={iconColor()} />
-  </td>
+1. In `TodoItem.js`, add an onClick event for the status icon with an alert like this to show them what will happen
 
-2- Next, fix the function call
+```javascript
+<i className={statIcon()} onClick={() => alert("CHANGE STATUS")} />
+```
 
-  <td onClick={() => alert('button clicked')}>
-    <i className={statIcon()} style={iconColor()} />
-  </td>
+2. create a constructer and create a method with an alert and call this method in the onClick instead
 
-2- create a constructer and create a function with an alert and call this function in the onClick instead
-
+```javascript
 constructor(props) {
 super(props)
-this.clicked = this.clicked.bind(this);
+this.toggleStatus = this.toggleStatus.bind(this);
 }
 
 ...
-clicked(){
-alert('button clicked')
+toggleStatus(){
+  alert('CHANGE STATUS')
 }
 
 ...
 
-  <td onClick={this.clicked}>
-      <i className={statIcon()} style={iconColor()} />
-  </td>
+<i className={statIcon()} onClick={this.toggleStatus} />
+```
 
-3- add a state using the values of the props.task
+3. add a state using the values of the props.task
+
+```javascript
 constructor(props) {
-...
-
-    this.state = {
-      status : this.props.task.status,
-    }
-
-    ...
-
+  ...
+  this.state = {
+    done: props.task.done
+  }
+  ...
 }
+```
 
-4 - change the value (toggle) of the status state in the previously created function.
+4. change the value (toggle) of the status state in the previously created function.
 
-clicked(){
-this.setState({status : !this.state.status})
-console.log(this.state.status)
+```javascript
+toggleStatus() {
+  const newStatus = !this.state.done;
+  this.setState({done: newStatus});
 }
+```
 
-5- change the used status in the render function from props to state
+5. change the used status in the render function from props to state
 
+```javascript
 render(){
-
-    let statIcon = () => {
-      return this.state.status
-        ? "fa fa-check-circle"
-        : "fa fa-times-circle";
-    };
-
-    let iconColor = () => {
-      return this.state.status ? { color: "green" } : { color: "red" };
-    };
-
-    ...
-
+  ...
+  const statusIcon = () => {
+    if (this.state.done) {
+      return "fa fa-check-circle";
+    } else {
+      return "fa fa-times-circle";
+    }
+  };
+  ...
 }
+```
+
+### Delete Task
+
+1. in `TodoItem.js`, add an onClick event for the delete icon with an alert
+
+```javascript
+<i className="fa fa-times" onClick={() => alert(`DELETE task #${task.id}`)} />
+```
+
+2. Discuss why this component cannot delete itself.
+
+3. In `App.js`, add a method that recieves an `id` and alerts it
+
+```javascript
+deleteTask(id) {
+  alert(`DELETE task #${id}`)
+}
+```
+
+4. Pass this method down through `TodoList` to `TodoItem` as a prop
+
+`App.js`
+
+```javascript
+<TodoList tasks={this.state.tasks} deleteTask={this.deleteTask} />
+```
+
+`TodoList.js`
+
+```javascript
+let taskRows = this.props.tasks.map(task => (
+  <TodoItem task={task} key={task.task} deleteTask={this.props.deleteTask} />
+));
+```
+
+5. Replace the alert with this method
+
+`TodoItem.js`
+
+```javascript
+<i className="fa fa-times" onClick={() => deleteTask(task.id)} />
+```
+
+6. Rewrite `deleteTask` to actually modify state (don't forget to bind)
+
+`App.js`
+
+```javascript
+deleteTask(id) {
+  const tasks = this.state.tasks.filter(task => task.id !== id);
+  this.setState({ tasks: tasks });
+}
+```

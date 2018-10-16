@@ -21,6 +21,9 @@ class TableRow extends Component {
         </td>
         <td>{task.task}</td>
         <td className={task.priority}>{task.priority.toUpperCase()}</td>
+        <td>
+          <i className="fa fa-times" />
+        </td>
       </tr>
     );
   }

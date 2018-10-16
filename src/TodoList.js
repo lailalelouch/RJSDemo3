@@ -17,6 +17,7 @@ class TodoList extends Component {
             <th>STATUS</th>
             <th>TASK</th>
             <th>PRIORITY</th>
+            <th>DELETE</th>
           </tr>
         </thead>
         <tbody>{taskRows}</tbody>

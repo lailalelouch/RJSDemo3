@@ -6,8 +6,8 @@ class TableRow extends Component {
   render() {
     const task = this.props.task;
 
-    const statusIcon = done => {
-      if (done) {
+    const statusIcon = () => {
+      if (task.done) {
         return "fa fa-check-circle";
       } else {
         return "fa fa-times-circle";
@@ -17,7 +17,7 @@ class TableRow extends Component {
     return (
       <tr className="row">
         <td>
-          <i className={statusIcon(task.done)} />
+          <i className={statusIcon()} />
         </td>
         <td>{task.task}</td>
         <td className={task.priority}>{task.priority.toUpperCase()}</td>

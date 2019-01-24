@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import "../node_modules/font-awesome/css/font-awesome.min.css";
+import "font-awesome/css/font-awesome.min.css";
 
 import "./App.css";
 import tasks from "./data";

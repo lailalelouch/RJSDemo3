@@ -113,9 +113,9 @@ class App extends Component {
     return (
       <div className="rectangle">
         <p className="title">TO DO LIST</p>
-        <ToDoList task="Buy Steak" done=true priority="middle"/>
-        <ToDoList task="Clean your room" done=false priority="low"/>
-        <ToDoList task="Solve homework" done=true priority="high"/>
+        <ToDoList task="Buy Steak" done={true} priority="middle"/>
+        <ToDoList task="Clean your room" done={false} priority="low"/>
+        <ToDoList task="Solve homework" done={true} priority="high"/>
       </div>
     );
   }
@@ -260,14 +260,13 @@ export default TodoList;
 8. Iterate through the array using .map
 
 ```javascript
-let taskRows = this.props.tasks.map(task => (
-  <TodoItem task={task} key={task.task} />
-));
-
 import TodoItem from "./TodoItem";
 
 class TodoList extends Component {
   render() {
+    let taskRows = this.props.tasks.map(task => (
+      <TodoItem task={task} key={task.task} />
+     ));
     return (
       <table className="table">
         <thead>

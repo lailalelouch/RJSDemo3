@@ -163,7 +163,7 @@ class App extends Component {
     return (
       <div className="rectangle">
         <p className="title">TO DO LIST</p>
-        <ToDoList tasks={tasks} />
+        <ToDoList toDoItems={tasks} />
       </div>
     );
   }
@@ -187,11 +187,11 @@ class TodoList extends Component {
         <tbody>
           <tr>
             <td>
-              <i className={statusIcon(this.props.tasks[0].done)} />
+              <i className={statusIcon(this.props.toDoItems[0].done)} />
             </td>
-            <td>{this.props.tasks[0].task}</td>
-            <td className={this.props.tasks[0].priority}>
-              {this.props.tasks[0].priority.toUpperCase()}
+            <td>{this.props.toDoItems[0].task}</td>
+            <td className={this.props.toDoItems[0].priority}>
+              {this.props.toDoItems[0].priority.toUpperCase()}
             </td>
           </tr>
         </tbody>
@@ -201,7 +201,7 @@ class TodoList extends Component {
 }
 ```
 
-6. Create a component: TodoItem
+6. Create a component: TodoItem. Tell them that you will pass a prop to this component called "toDoItem"
 
 ```javascript
 import React, { Component } from "react";
@@ -218,10 +218,10 @@ class TodoItem extends Component {
     return (
       <tr>
         <td>
-          <i className={statusIcon(task.done)} />
+          <i className={statusIcon(this.props.toDoItem.done)} />
         </td>
         <td>{task.task}</td>
-        <td className={task.priority}>{task.priority.toUpperCase()}</td>
+        <td className={this.props.toDoItem.priority}>{toDoItem.priority.toUpperCase()}</td>
       </tr>
     );
   }
@@ -246,9 +246,9 @@ class TodoList extends Component {
           </tr>
         </thead>
         <tbody>
-          <TodoItem task={this.props.tasks[0]} />
-          <TodoItem task={this.props.tasks[1]} />
-          <TodoItem task={this.props.tasks[2]} />
+          <TodoItem toDoItem={this.props.toDoItems[0]} />
+          <TodoItem toDoItem={this.props.toDoItems[1]} />
+          <TodoItem toDoItem={this.props.toDoItems[2]} />
         </tbody>
       </table>
     );
@@ -264,8 +264,8 @@ import TodoItem from "./TodoItem";
 
 class TodoList extends Component {
   render() {
-    let taskRows = this.props.tasks.map(task => (
-      <TodoItem task={task} key={task.task} />
+    let taskRows = this.props.toDoItems.map(item => (
+      <TodoItem toDoItem={item} key={item.task} />
      ));
     return (
       <table className="table">

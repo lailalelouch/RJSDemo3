@@ -141,7 +141,7 @@ function ToDoList(props) {
 }
 ```
 
-5. Send "data" through props
+5. Send all "data" through props. Note that we named our data `toDoItems` when we passed them down to `ToDoList`.
 
 ```javascript
 import tasks from "./data";
@@ -185,7 +185,7 @@ function ToDoList(props) {
 }
 ```
 
-6. Create a component: TodoItem. Tell them that you will pass a prop to this component called "toDoItem"
+6. Create a component: ToDoItem. Tell them that you will pass a prop to this component called "toDoItem"
 
 ```javascript
 import React from "react";
@@ -203,12 +203,12 @@ function ToDoItem(props) {
       <td>
         <i className={statusIcon(props.toDoItem.done)} />
       </td>
-      <td>{task.task}</td>
-      <td className={props.toDoItem.priority}>{toDoItem.priority.toUpperCase()}</td>
+      <td>{props.toDoItem.task}</td>
+      <td className={props.toDoItem.priority}>{props.toDoItem.priority.toUpperCase()}</td>
     </tr>
   );
 }
-export default TodoItem;
+export default ToDoItem;
 ```
 
 7. Call Component TodoItem a few times
@@ -227,9 +227,9 @@ function ToDoList() {
         </tr>
       </thead>
       <tbody>
-        <TodoItem toDoItem={this.props.toDoItems[0]} />
-        <TodoItem toDoItem={this.props.toDoItems[1]} />
-        <TodoItem toDoItem={this.props.toDoItems[2]} />
+        <ToDoItem toDoItem={this.props.toDoItems[0]} />
+        <ToDoItem toDoItem={this.props.toDoItems[1]} />
+        <ToDoItem toDoItem={this.props.toDoItems[2]} />
       </tbody>
     </table>
   );

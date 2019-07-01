@@ -2,7 +2,7 @@ import React from "react";
 
 import "./App.css";
 
-function TableRow(props) {
+function ToDoItem(props) {
   const task = props.task;
 
   const statusIcon = done => {
@@ -24,4 +24,4 @@ function TableRow(props) {
   );
 }
 
-export default TableRow;
+export default ToDoItem;

@@ -2,11 +2,11 @@ import React from "react";
 
 import "./App.css";
 
-import TodoItem from "./TodoItem";
+import ToDoItem from "./ToDoItem";
 
-function TodoList(props) {
+function ToDoList(props) {
   const taskRows = props.tasks.map(task => (
-    <TodoItem task={task} key={task.task} />
+    <ToDoItem task={task} key={task.task} />
   ));
 
   return (
@@ -23,4 +23,4 @@ function TodoList(props) {
   );
 }
 
-export default TodoList;
+export default ToDoList;

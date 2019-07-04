@@ -2,12 +2,12 @@ import React, { Component } from "react";
 
 import "./App.css";
 
-import TodoItem from "./TodoItem";
+import ToDoItem from "./ToDoItem";
 
-class TodoList extends Component {
+class ToDoList extends Component {
   render() {
     let taskRows = this.props.tasks.map(task => (
-      <TodoItem task={task} key={task.task} />
+      <ToDoItem task={task} key={task.task} />
     ));
 
     return (
@@ -25,4 +25,4 @@ class TodoList extends Component {
     );
   }
 }
-export default TodoList;
+export default ToDoList;

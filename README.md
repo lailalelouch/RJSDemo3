@@ -124,13 +124,19 @@ toggleStatus = () => {
 <i className="fa fa-times" onClick={() => alert(`DELETE task #${task.id}`)} />
 ```
 
-2. Discuss why this component cannot delete itself.
+2. Discuss why this component cannot delete itself. To delete itself it needs access to the array of items. It doesn't have the array.
 
-3. In `App.js`, add a method that recieves an `id` and alerts it
+3. Turn `App.js` into a class-based component, add a method that recieves an `id` and alerts it
 
 ```javascript
-deleteTask(id) {
-  alert(`DELETE task #${id}`)
+
+class App extends Component {
+
+  deleteTask = id => {
+    alert(`DELETE task #${id}`);
+  };
+
+  ...
 }
 ```
 
@@ -146,7 +152,7 @@ deleteTask(id) {
 
 ```javascript
 let taskRows = this.props.tasks.map(task => (
-  <ToDoItem task={task} key={task.task} deleteTask={this.props.deleteTask} />
+  <ToDoItem task={task} key={task.task} deleteTask={props.deleteTask} />
 ));
 ```
 
@@ -155,16 +161,31 @@ let taskRows = this.props.tasks.map(task => (
 `ToDoItem.js`
 
 ```javascript
-<i className="fa fa-times" onClick={() => deleteTask(task.id)} />
+<i className="fa fa-times" onClick={() => this.props.deleteTask(task.id)} />
 ```
 
-6. Rewrite `deleteTask` to actually modify state (don't forget to bind)
+6. Give `App` a list of tasks for state. Rewrite `deleteTask` to actually modify state.
 
 `App.js`
 
 ```javascript
-deleteTask(id) {
-  const tasks = this.state.tasks.filter(task => task.id !== id);
-  this.setState({ tasks: tasks });
+class App extends Component {
+  state = {
+    tasks: tasks
+  };
+
+  deleteTask = id => {
+    const newTasks = this.state.tasks.filter(task => task.id !== id);
+    this.setState({ tasks: newTasks });
+  };
+
+  render() {
+    return (
+      <div className="rectangle">
+        <p className="title">TO DO LIST</p>
+        <ToDoList tasks={this.state.tasks} deleteTask={this.deleteTask} />
+      </div>
+    );
+  }
 }
 ```

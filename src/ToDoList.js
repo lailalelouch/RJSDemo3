@@ -4,7 +4,7 @@ import ToDoItem from "./ToDoItem";
 
 function ToDoList(props) {
   const taskRows = props.tasks.map(item => (
-    <ToDoItem item={item} key={item.id} />
+    <ToDoItem item={item} key={item.task} deleteTask={props.deleteTask} />
   ));
 
   return (

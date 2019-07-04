@@ -2,70 +2,123 @@
 
 presentation : https://drive.google.com/open?id=1sVGFKDgr3Kd138my5XHJuJfwJMAuWPgH
 
-1. In `TodoItem.js`, add an onClick event for the status icon with an alert like this to show them what will happen
+1. In `ToDoItem.js`, add an onClick event for the status icon with an alert like this to show them what will happen
 
 ```javascript
 <i className={statIcon()} onClick={() => alert("CHANGE STATUS")} />
 ```
 
-2. create a constructer and create a method with an alert and call this method in the onClick instead
+2. create a function with an alert and call this function in the onClick instead
 
 ```javascript
-constructor(props) {
-super(props)
-this.toggleStatus = this.toggleStatus.bind(this);
-}
 
 ...
-toggleStatus(){
-  alert('CHANGE STATUS')
-}
-
+const toggleStatus = () => alert('CHANGE STATUS')
 ...
 
-<i className={statIcon()} onClick={this.toggleStatus} />
+<i className={statIcon()} onClick={toggleStatus} />
 ```
 
-3. add a state using the values of the props.task
+3. toggle the `done` property manually. Show that it **is** actually being toggled. Explain that react uses **state** to track changes and trigger updates.
 
 ```javascript
-constructor(props) {
-  ...
-  this.state = {
-    done: props.task.done
-  }
-  ...
-}
-```
-
-4. change the value (toggle) of the status state in the previously created function.
-
-```javascript
-toggleStatus() {
-  const newStatus = !this.state.done;
-  this.setState({done: newStatus});
-}
-```
-
-5. change the used status in the render function from props to state
-
-```javascript
-render(){
-  ...
-  const statusIcon = () => {
-    if (this.state.done) {
-      return "fa fa-check-circle";
-    } else {
-      return "fa fa-times-circle";
-    }
+...
+  const toggleStatus = () => {
+    item.done = !item.done;
+    console.log(item);
   };
-  ...
+...
+```
+
+4. Explain stateful (class-based) components.
+
+5. Turn `ToDoItem` into a class-based component. Explain that `props` are now inherited as `this.props`.
+
+```javascript
+import React, { Component } from "react";
+
+class ToDoItem extends Component {
+  render() {
+    const item = this.props.item;
+
+    ...
+
+    return (
+      <tr className="row">
+        ...
+      </tr>
+    );
+  }
 }
+```
+
+6. Turn `toggleStatus` and `statusIcon` into methods
+
+```javascript
+class ToDoItem extends Component {
+  statusIcon = () => {
+    const item = this.props.item;
+
+    ...
+  };
+
+  toggleStatus = () => {
+    const item = this.props.item;
+
+    ...
+  };
+
+  render() {
+    const item = this.props.item;
+
+    return (
+      <tr className="row">
+        <td>
+          <i className={this.statusIcon()} onClick={this.toggleStatus} />
+        </td>
+        ...
+      </tr>
+    );
+  }
+}
+```
+
+7. add a state using the value of the `this.props.item.done`.
+   Show the state in the dev tools.
+   Switch to using state in the methods.
+   Show that directly mutating state doesn't work and throws a warning.
+
+```javascript
+state = {
+  done: this.props.item.done
+};
+
+statusIcon = () => {
+  if (this.state.done) {
+    return "fa fa-check-circle";
+  } else {
+    return "fa fa-times-circle";
+  }
+};
+
+toggleStatus = () => {
+  this.state.done = !this.state.done;
+  console.log(this.state);
+};
+```
+
+8. Use `setState` to change the value (toggle) of the in `toggleStatus`. Show the state changing in the dev tools.
+
+```javascript
+toggleStatus = () => {
+  const newStatus = !this.state.done;
+  this.setState({ done: newStatus });
+};
 ```
 
 ### Delete Task
 
-1. in `TodoItem.js`, add an onClick event for the delete icon with an alert
+1. in `ToDoItem.js`, add an onClick event for the delete icon with an alert
 
 ```javascript
 <i className="fa fa-times" onClick={() => alert(`DELETE task #${task.id}`)} />
@@ -81,25 +134,25 @@ deleteTask(id) {
 }
 ```
 
-4. Pass this method down through `TodoList` to `TodoItem` as a prop
+4. Pass this method down through `ToDoList` to `ToDoItem` as a prop
 
 `App.js`
 
 ```javascript
-<TodoList tasks={this.state.tasks} deleteTask={this.deleteTask} />
+<ToDoList tasks={this.state.tasks} deleteTask={this.deleteTask} />
 ```
 
-`TodoList.js`
+`ToDoList.js`
 
 ```javascript
 let taskRows = this.props.tasks.map(task => (
-  <TodoItem task={task} key={task.task} deleteTask={this.props.deleteTask} />
+  <ToDoItem task={task} key={task.task} deleteTask={this.props.deleteTask} />
 ));
 ```
 
 5. Replace the alert with this method
 
-`TodoItem.js`
+`ToDoItem.js`
 
 ```javascript
 <i className="fa fa-times" onClick={() => deleteTask(task.id)} />

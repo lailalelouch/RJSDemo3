@@ -2,16 +2,9 @@
 
 presentation : https://docs.google.com/presentation/d/1XD1QxGNfEP_BmNRlHPyP2h5WTj6gi4ql0WemniTw4vY
 
-1. In `ToDoItem.js`, add an onClick event for the status icon with an alert like this to show them what will happen
+1. In `ToDoItem.js`, create a function with an alert and call this function in the onClick
 
    ```jsx
-   <i className={statusIcon()} onClick={() => alert("CHANGE STATUS")} />
-   ```
-
-2. create a function with an alert and call this function in the onClick instead
-
-   ```jsx
-
    ...
    const toggleStatus = () => alert('CHANGE STATUS')
    ...
@@ -19,7 +12,7 @@ presentation : https://docs.google.com/presentation/d/1XD1QxGNfEP_BmNRlHPyP2h5WT
    <i className={statusIcon()} onClick={toggleStatus} />
    ```
 
-3. toggle the `done` property manually. Show that it **is** actually being toggled. Explain that react uses **state** to track changes and trigger updates.
+2. toggle the `done` property manually. Show that it **is** actually being toggled. Explain that react uses **state** to track changes and trigger updates.
 
    ```jsx
    ...
@@ -30,9 +23,7 @@ presentation : https://docs.google.com/presentation/d/1XD1QxGNfEP_BmNRlHPyP2h5WT
    ...
    ```
 
-4. Explain stateful (class-based) components.
-
-5. Turn `ToDoItem` into a class-based component. Explain that `props` are now inherited as `this.props`.
+3. Turn `ToDoItem` into a class-based component. Explain that `props` are now inherited as `this.props`.
 
    ```jsx
    import React, { Component } from "react";
@@ -52,7 +43,7 @@ presentation : https://docs.google.com/presentation/d/1XD1QxGNfEP_BmNRlHPyP2h5WT
    }
    ```
 
-6. Turn `toggleStatus` and `statusIcon` into methods
+4. Turn `toggleStatus` and `statusIcon` into methods
 
    ```jsx
    class ToDoItem extends Component {
@@ -83,7 +74,7 @@ presentation : https://docs.google.com/presentation/d/1XD1QxGNfEP_BmNRlHPyP2h5WT
    }
    ```
 
-7. add a state using the value of the `this.props.item.done`.
+5. add a state using the value of the `this.props.item.done`.
    Show the state in the dev tools.
    Switch to using state in the methods.
    Show that directly mutating state doesn't work and throws a warning.
@@ -107,7 +98,7 @@ presentation : https://docs.google.com/presentation/d/1XD1QxGNfEP_BmNRlHPyP2h5WT
    };
    ```
 
-8. Use `setState` to change the value (toggle) of the in `toggleStatus`. Show the state changing in the dev tools.
+6. Use `setState` to change the value (toggle) of the in `toggleStatus`. Show the state changing in the dev tools.
 
    ```jsx
    toggleStatus = () => {
@@ -123,11 +114,11 @@ presentation : https://docs.google.com/presentation/d/1XD1QxGNfEP_BmNRlHPyP2h5WT
    ```jsx
    <i
      className="fa fa-times"
-     onClick={() => alert(`DELETE task #${task.id}`)}
+     onClick={() => alert(`DELETE task #${item.id}`)}
    />
    ```
 
-2. Discuss why this component cannot delete itself. To delete itself it needs access to the array of items. It doesn't have the array.
+2. Discuss why this component cannot delete itself. To delete itself it needs access to the array of items. It doesn't have the array. But which component DOES have access to the whole list of tasks?
 
 3. Turn `App.js` into a class-based component, add a method that recieves an `id` and alerts it
 
@@ -148,14 +139,14 @@ presentation : https://docs.google.com/presentation/d/1XD1QxGNfEP_BmNRlHPyP2h5WT
    `App.js`
 
    ```jsx
-   <ToDoList tasks={this.state.tasks} deleteTask={this.deleteTask} />
+   <ToDoList tasks={tasks} deleteTask={this.deleteTask} />
    ```
 
    `ToDoList.js`
 
    ```jsx
-   let taskRows = this.props.tasks.map(task => (
-     <ToDoItem task={task} key={task.task} deleteTask={props.deleteTask} />
+   let taskRows = this.props.tasks.map(item => (
+     <ToDoItem item={item} key={item.id} deleteTask={props.deleteTask} />
    ));
    ```
 
@@ -164,7 +155,7 @@ presentation : https://docs.google.com/presentation/d/1XD1QxGNfEP_BmNRlHPyP2h5WT
    `ToDoItem.js`
 
    ```javascript
-   <i className="fa fa-times" onClick={() => this.props.deleteTask(task.id)} />
+   <i className="fa fa-times" onClick={() => this.props.deleteTask(item.id)} />
    ```
 
 6. Give `App` a list of tasks for state. Rewrite `deleteTask` to actually modify state.

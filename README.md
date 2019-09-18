@@ -5,7 +5,7 @@ presentation : https://drive.google.com/open?id=1sVGFKDgr3Kd138my5XHJuJfwJMAuWPg
 1. In `ToDoItem.js`, add an onClick event for the status icon with an alert like this to show them what will happen
 
 ```javascript
-<i className={statIcon()} onClick={() => alert("CHANGE STATUS")} />
+<i className={statusIcon()} onClick={() => alert("CHANGE STATUS")} />
 ```
 
 2. create a function with an alert and call this function in the onClick instead
@@ -16,7 +16,7 @@ presentation : https://drive.google.com/open?id=1sVGFKDgr3Kd138my5XHJuJfwJMAuWPg
 const toggleStatus = () => alert('CHANGE STATUS')
 ...
 
-<i className={statIcon()} onClick={toggleStatus} />
+<i className={statusIcon()} onClick={toggleStatus} />
 ```
 
 3. toggle the `done` property manually. Show that it **is** actually being toggled. Explain that react uses **state** to track changes and trigger updates.
